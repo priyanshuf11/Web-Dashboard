@@ -6,14 +6,15 @@
 <title>~/home</title>
 
 <style>
-    :root {
-        --bg: #03070d;
-        --text: #c8d9e8;
-        --muted: #71869a;
-        --accent: #9bbbd4;
-        --hover: #e5f3ff;
-        --line: #17222d;
-    }
+:root {
+    --bg: #03070d;
+    --text: #c8d9e8;
+    --muted: #71869a;
+    --accent: #9bbbd4;
+    --link: #657b8e;
+    --hover: #dcecf8;
+    --line: #17222d;
+}
 
     * {
         box-sizing: border-box;
@@ -58,6 +59,8 @@
         overflow: hidden;
         background: #0b0b0b;
         flex-shrink: 0;
+
+        animation: imageFrame 0.9s ease-out both;
     }
 
     .portrait img {
@@ -110,7 +113,7 @@
 
     .links a {
         width: fit-content;
-        color: #765f4c;
+        color:var(--link);
         text-decoration: none;
         font-size: 17px;
         font-weight: 500;
