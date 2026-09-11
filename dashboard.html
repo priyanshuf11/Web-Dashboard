@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>~/home</title>
+
+<style>
+    :root {
+        --bg: #03070d;
+        --text: #c8d9e8;
+        --muted: #71869a;
+        --accent: #9bbbd4;
+        --hover: #e5f3ff;
+        --line: #17222d;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        background: var(--bg);
+    }
+
+    body {
+        min-height: 100vh;
+        padding: 40px;
+        position: relative;
+        overflow: hidden;
+        color: var(--text);
+        font-family: "Cascadia Mono", "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", "Courier New", monospace;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*
+       IMPORTANT:
+       The image is NOT a background.
+       It is a normal element with a fixed box, so the text
+       can never sit on top of it.
+    */
+    .dashboard {
+        width: min(1120px, 100%);
+        display: grid;
+        grid-template-columns: 310px minmax(0, 1fr);
+        column-gap: 88px;
+        align-items: center;
+    }
+
+    .portrait {
+        width: 310px;
+        height: 465px;
+        overflow: hidden;
+        background: #0b0b0b;
+        flex-shrink: 0;
+    }
+
+    .portrait img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .content {
+        min-width: 0;
+    }
+
+    .greeting {
+        margin: 0 0 10px;
+        color: #d7e7f4;
+        font-size: 42px;
+        line-height: 1.1;
+        font-weight: 600;
+        letter-spacing: -1px;
+    }
+
+    .date {
+        margin-bottom: 40px;
+        color: var(--muted);
+        font-size: 13px;
+    }
+
+    .groups {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(130px, 1fr));
+        column-gap: 76px;
+        row-gap: 40px;
+    }
+
+    .group-title {
+        margin-bottom: 12px;
+        color: var(--accent);
+        font-size: 19px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .links {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .links a {
+        width: fit-content;
+        color: #765f4c;
+        text-decoration: none;
+        font-size: 17px;
+        font-weight: 500;
+        line-height: 1.4;
+        transition: color 0.15s ease, transform 0.15s ease;
+    }
+
+    .links a:hover {
+        color: var(--hover);
+        transform: translateX(4px);
+    }
+
+    .footer {
+        margin-top: 44px;
+        padding-top: 10px;
+        border-top: 1px solid var(--line);
+        color: #344553;
+        font-size: 12px;
+    }
+
+    /* Smaller browser windows */
+    @media (max-width: 760px) {
+        body {
+            padding: 28px 22px;
+        }
+
+        .dashboard {
+            grid-template-columns: 1fr;
+            row-gap: 40px;
+            width: min(500px, 100%);
+        }
+
+        .portrait {
+            width: 220px;
+            height: 330px;
+            justify-self: center;
+        }
+
+        .groups {
+            column-gap: 30px;
+        }
+    }
+
+    @media (max-width: 430px) {
+        .groups {
+            grid-template-columns: 1fr;
+        }
+
+        .greeting {
+            font-size: 32px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <div class="portrait">
+        <img src="side1.jpg" alt="">
+    </div>
+
+    <div class="content">
+
+        <h1 class="greeting">Welcome back!</h1>
+        <div class="date" id="date"></div>
+
+        <div class="groups">
+
+            <div class="group">
+                <div class="group-title">~/general</div>
+                <div class="links">
+                    <a href="https://mail.google.com" target="_blank">Gmail</a>
+                    <a href="https://www.youtube.com" target="_blank">YouTube</a>
+                    <a href="https://www.reddit.com" target="_blank">Reddit</a>
+                    <a href="https://www.google.com" target="_blank">Google</a>
+                </div>
+            </div>
+
+            <div class="group">
+                <div class="group-title">~/dev</div>
+                <div class="links">
+                    <a href="https://github.com" target="_blank">GitHub</a>
+                    <a href="https://leetcode.com" target="_blank">LeetCode</a>
+                    <a href="https://stackoverflow.com" target="_blank">Stack Overflow</a>
+                </div>
+            </div>
+
+            <div class="group">
+                <div class="group-title">~/ai</div>
+                <div class="links">
+                    <a href="https://chatgpt.com" target="_blank">ChatGPT</a>
+                    <a href="https://claude.ai" target="_blank">Claude</a>
+                    <a href="https://gemini.google.com" target="_blank">Gemini</a>
+                    <a href="https://www.perplexity.ai" target="_blank">Perplexity</a>
+                </div>
+            </div>
+
+            <div class="group">
+                <div class="group-title">~/other</div>
+                <div class="links">
+                    <a href="https://www.wikipedia.org" target="_blank">Wikipedia</a>
+                    <a href="https://maps.google.com" target="_blank">Maps</a>
+                    <a href="https://drive.google.com" target="_blank">Drive</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">~/home</div>
+
+    </div>
+</div>
+
+<script>
+function updateDate() {
+    const now = new Date();
+
+    const day = now.toLocaleDateString(undefined, {
+        weekday: "long"
+    });
+
+    const date = now.toLocaleDateString(undefined, {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    });
+
+    const time = now.toLocaleTimeString(undefined, {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+    });
+
+    document.getElementById("date").textContent =
+        `${day} ${time} | ${date}`;
+}
+
+updateDate();
+setInterval(updateDate, 1000);
+</script>
+
+</body>
+</html>
