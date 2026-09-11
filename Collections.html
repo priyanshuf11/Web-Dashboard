@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>~/collections</title>
+
+<style>
+    :root {
+        --bg: #03070d;
+        --text: #c8d9e8;
+        --muted: #71869a;
+        --accent: #9bbbd4;
+        --hover: #e5f3ff;
+        --line: #17222d;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        background: var(--bg);
+    }
+
+    body {
+        overflow: hidden;
+
+        color: var(--text);
+
+        font-family:
+            "Cascadia Mono",
+            "JetBrains Mono",
+            "SFMono-Regular",
+            Consolas,
+            "Liberation Mono",
+            "Courier New",
+            monospace;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    /* -------------------------
+       COLLECTION STRIP
+    ------------------------- */
+
+  .collections {
+      width: 100%;
+      height: 100vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 18px;
+
+      padding: 40px 70px;
+
+      opacity: 0;
+
+      animation: boot 0.55s ease forwards;
+  }
+
+
+    /* -------------------------
+       COLLECTION CARD
+    ------------------------- */
+
+  .collection {
+      position: relative;
+
+      /*
+        9 : 16 portrait ratio.
+
+        Maximum width = 240px,
+        but shrink automatically so
+        all 6 cards fit inside the
+        available screen width.
+      */
+      width: min(
+          240px,
+          calc((100vw - 140px - 90px) / 6)
+      );
+
+      aspect-ratio: 9 / 16;
+
+      flex-shrink: 0;
+
+      overflow: hidden;
+
+      background: #0b0f14;
+
+      cursor: pointer;
+
+      text-decoration: none;
+
+      transition:
+          transform 0.2s ease,
+          opacity 0.2s ease;
+  }
+
+
+    /* -------------------------
+       IMAGE
+    ------------------------- */
+
+    .collection img {
+        display: block;
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        filter: brightness(0.78);
+
+        transition:
+            filter 0.2s ease,
+            transform 0.2s ease;
+    }
+
+
+    /* -------------------------
+       MOUSE HOVER
+    ------------------------- */
+
+    .collection:hover {
+        transform: translateY(-4px);
+    }
+
+    .collection:hover img {
+        filter: brightness(0.95);
+    }
+
+
+    /* -------------------------
+       COLLECTION NAME
+    ------------------------- */
+
+    .collection-name {
+        position: absolute;
+
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        padding: 45px 12px 16px;
+
+        color: #ffffff;
+
+        font-size: 14px;
+        font-weight: 500;
+
+        line-height: 1.3;
+
+        text-align: center;
+
+        background:
+            linear-gradient(
+                transparent,
+                rgba(3, 7, 13, 0.92)
+            );
+
+        pointer-events: none;
+    }
+
+
+    /* -------------------------
+       REMOVE FOCUS OUTLINE
+    ------------------------- */
+
+    .collection:focus,
+    .collection:focus-visible {
+        outline: none;
+        box-shadow: none;
+    }
+
+
+    /* -------------------------
+       BOOT ANIMATION
+    ------------------------- */
+
+    @keyframes boot {
+
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    }
+
+
+    /* -------------------------
+       FOOTER
+    ------------------------- */
+
+    .footer {
+        position: fixed;
+
+        bottom: 24px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        color: #344553;
+
+        font-size: 12px;
+
+        user-select: none;
+    }
+
+
+    /* -------------------------
+       SMALL SCREENS
+    ------------------------- */
+
+    @media (max-width: 1500px) {
+
+        .collections {
+            gap: 14px;
+            padding: 40px 25px;
+        }
+
+        .collection {
+            width: 210px;
+        }
+
+    }
+
+
+    @media (max-width: 1300px) {
+
+        .collections {
+            gap: 12px;
+            padding: 35px 20px;
+        }
+
+        .collection {
+            width: 185px;
+        }
+
+    }
+
+
+    @media (max-width: 1100px) {
+
+        .collections {
+            gap: 10px;
+            padding: 30px 15px;
+        }
+
+        .collection {
+            width: 160px;
+        }
+
+        .collection-name {
+            font-size: 13px;
+        }
+
+    }
+
+
+    @media (max-width: 900px) {
+
+        .collections {
+            gap: 8px;
+            padding: 25px 10px;
+        }
+
+        .collection {
+            width: 140px;
+        }
+
+        .collection-name {
+            font-size: 12px;
+        }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+        .collections {
+            gap: 6px;
+            padding: 20px 8px;
+        }
+
+        .collection {
+            width: 120px;
+        }
+
+        .collection-name {
+            font-size: 11px;
+        }
+
+    }
+</style>
+</head>
+
+
+<body>
+
+
+<div class="collections">
+
+
+    <!-- HOME -->
+
+    <a class="collection"
+       href="home.html">
+
+        <img src="Reze.jpg" alt="">
+
+        <div class="collection-name">
+            ~/home
+        </div>
+
+    </a>
+
+
+    <!-- WORK -->
+
+    <a class="collection"
+       href="work.html">
+
+        <img src="hirugama.jpg" alt="">
+
+        <div class="collection-name">
+            ~/work
+        </div>
+
+    </a>
+
+
+    <!-- AI -->
+
+    <a class="collection"
+       href="ai.html">
+
+        <img src="lightYagami.jpg" alt="">
+
+        <div class="collection-name">
+            ~/ai
+        </div>
+
+    </a>
+
+
+    <!-- SOCIAL -->
+
+    <a class="collection"
+       href="social.html">
+
+        <img src="gintoki.jpg" alt="">
+
+        <div class="collection-name">
+            ~/social
+        </div>
+
+    </a>
+
+
+    <!-- UNDERGROUND -->
+
+    <a class="collection"
+       href="underground.html">
+
+        <img src="sukuna.jpg" alt="">
+
+        <div class="collection-name">
+            ~/underground
+        </div>
+
+    </a>
+
+
+    <!-- ENTERTAINMENT -->
+
+    <a class="collection"
+       href="entertainment.html">
+
+        <img src="evaglion.jpg" alt="">
+
+        <div class="collection-name">
+            ~/entertainment
+        </div>
+
+    </a>
+
+
+</div>
+
+
+<div class="footer">
+    ~/collections
+</div>
+
+
+<script>
+
+const collections =
+    [...document.querySelectorAll(".collection")];
+
+let current = 0;
+
+
+/* -------------------------
+   SET CURRENT COLLECTION
+------------------------- */
+
+function setCurrent(index) {
+
+    current =
+        (index + collections.length)
+        % collections.length;
+
+}
+
+
+/* -------------------------
+   KEYBOARD NAVIGATION
+------------------------- */
+
+document.addEventListener("keydown", event => {
+
+    switch (event.key) {
+
+
+        case "ArrowRight":
+        case "l":
+
+            event.preventDefault();
+
+            setCurrent(current + 1);
+
+            break;
+
+
+        case "ArrowLeft":
+        case "h":
+
+            event.preventDefault();
+
+            setCurrent(current - 1);
+
+            break;
+
+
+        case "Enter":
+
+            event.preventDefault();
+
+            collections[current].click();
+
+            break;
+
+
+        case "Escape":
+        case "m":
+
+            event.preventDefault();
+
+            window.location.href = "home.html";
+
+            break;
+
+    }
+
+});
+
+
+/* -------------------------
+   MOUSE
+------------------------- */
+
+collections.forEach((item, index) => {
+
+    item.addEventListener("mouseenter", () => {
+
+        setCurrent(index);
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
