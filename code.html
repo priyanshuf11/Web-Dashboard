@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>~/code</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=UnifrakturCook:wght@700&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+/* =========================================================
+   THEME
+========================================================= */
+
+:root {
+
+    --bg: #080708;
+
+    --white: #eee8e5;
+    --text: #aaa2a2;
+    --muted: #625b5c;
+
+    --red: #792731;
+    --red-bright: #a93642;
+    --red-dark: #351317;
+
+    --line: #24191b;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+}
+
+
+body {
+
+    background:
+        radial-gradient(
+            ellipse at 50% -15%,
+            rgba(121,39,49,0.10),
+            transparent 48%
+        ),
+        var(--bg);
+
+    color: var(--white);
+
+    font-family:
+        "JetBrains Mono",
+        monospace;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.dashboard {
+    width: min(1050px, calc(100vw - 70px));
+
+    height: 100vh;
+
+    margin: 0 auto;
+
+    padding: 32px 0 22px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    grid-template-rows:
+        auto
+        auto
+        auto;
+
+    column-gap: 55px;
+
+    row-gap: 26px;
+
+    align-content: center;
+}
+
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
+
+.hero {
+
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    height: 310px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #040304;
+
+    border:
+        1px solid
+        rgba(121,39,49,0.32);
+
+    box-shadow:
+        0 22px 65px rgba(0,0,0,0.58),
+        0 0 40px rgba(121,39,49,0.04);
+
+    animation:
+        heroIn
+        0.5s
+        cubic-bezier(.16,1,.3,1)
+        both;
+}
+
+
+.hero img {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    transform: scale(1.025);
+
+    filter:
+        brightness(0.82)
+        contrast(1.1)
+        saturate(0.72);
+
+    animation:
+        imageIn
+        0.7s
+        0.05s
+        cubic-bezier(.16,1,.3,1)
+        both;
+
+    transition:
+        transform 0.6s ease,
+        filter 0.5s ease;
+}
+
+
+.hero:hover img {
+
+    transform: scale(1.045);
+
+    filter:
+        brightness(0.9)
+        contrast(1.12)
+        saturate(0.82);
+}
+
+
+/* cinematic vignette */
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,0.22),
+            transparent 40%,
+            transparent 60%,
+            rgba(0,0,0,0.22)
+        ),
+        linear-gradient(
+            0deg,
+            rgba(0,0,0,0.20),
+            transparent 40%
+        );
+}
+
+
+@keyframes heroIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-8px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes imageIn {
+
+    0% {
+
+        clip-path:
+            inset(0 50% 0 50%);
+
+        transform:
+            scale(1.08);
+    }
+
+    100% {
+
+        clip-path:
+            inset(0);
+
+        transform:
+            scale(1.025);
+    }
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.identity {
+    min-height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    animation:
+        titleIn
+        0.55s
+        0.18s
+        cubic-bezier(.2,1.2,.3,1)
+        both;
+}
+
+.title {
+    margin: 0;
+
+    font-family:
+        "UnifrakturCook",
+        serif;
+
+    font-size:
+        clamp(52px, 5.2vw, 68px);
+
+    line-height: 0.9;
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+
+    color:
+        var(--white);
+}
+
+
+.title span {
+
+    color:
+        var(--red-bright);
+}
+
+
+@keyframes titleIn {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-25px)
+            rotate(0.5deg);
+    }
+
+    70% {
+
+        opacity: 1;
+
+        transform:
+            translateY(3px)
+            rotate(-0.1deg);
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.links {
+
+    grid-column: 1 / -1;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 55px;
+
+    padding-top: 16px;
+
+    border-top:
+        1px solid
+        var(--line);
+
+    animation:
+        linksIn
+        0.5s
+        0.28s
+        cubic-bezier(.16,1,.3,1)
+        both;
+}
+
+
+.link-column {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 35px;
+}
+
+
+/* =========================================================
+   GROUPS
+========================================================= */
+
+.group {
+
+    margin-bottom: 16px;
+}
+
+
+.group-title {
+    margin-bottom: 9px;
+
+    color: var(--red-bright);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+
+    text-transform: uppercase;
+}
+
+
+.group-title::before {
+
+    content: "// ";
+
+    color:
+        var(--red-dark);
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.group a {
+    position: relative;
+
+    display: block;
+
+    width: fit-content;
+
+    padding: 3px 0;
+
+    color:
+        #aaa2a2;
+
+    text-decoration: none;
+
+    font-family:
+        "JetBrains Mono",
+        monospace;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    line-height: 1.55;
+
+    transition:
+        color 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+.group a::before {
+
+    content: "> ";
+
+    position: absolute;
+
+    right:
+        calc(100% + 6px);
+
+    color:
+        transparent;
+
+    transition:
+        color 0.15s ease;
+}
+
+
+.group a:hover {
+
+    color:
+        var(--white);
+
+    transform:
+        translateX(5px);
+}
+
+
+.group a:hover::before {
+
+    color:
+        var(--red-bright);
+}
+
+
+.group a:focus,
+.group a:focus-visible {
+
+    outline: none;
+
+    color:
+        var(--white);
+
+    transform:
+        translateX(5px);
+}
+
+
+.group a:focus::before,
+.group a:focus-visible::before {
+
+    color:
+        var(--red-bright);
+}
+
+
+@keyframes linksIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(10px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding-top: 8px;
+
+    border-top:
+        1px solid
+        var(--line);
+
+    color:
+        #433d3f;
+
+    font-size: 9px;
+
+    letter-spacing: 0.8px;
+}
+
+
+.footer a {
+
+    color:
+        #433d3f;
+
+    text-decoration: none;
+
+    transition:
+        color 0.15s ease;
+}
+
+
+.footer a:hover {
+
+    color:
+        var(--red-bright);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    body {
+        overflow-y: auto;
+    }
+
+
+    .dashboard {
+
+        width:
+            min(
+                calc(100vw - 36px),
+                650px
+            );
+
+        height: auto;
+
+        min-height: 100vh;
+
+        padding:
+            24px 0;
+
+        grid-template-columns: 1fr;
+
+        grid-template-rows: auto;
+
+        row-gap: 20px;
+    }
+
+
+    .hero {
+
+        grid-column: 1;
+
+        height: 260px;
+    }
+
+
+    .identity {
+
+        min-height: auto;
+    }
+
+
+    .links {
+
+        grid-column: 1;
+
+        grid-template-columns: 1fr;
+
+        row-gap: 8px;
+    }
+
+
+    .link-column {
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .footer {
+
+        grid-column: 1;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .dashboard {
+
+        width:
+            calc(100vw - 28px);
+    }
+
+
+    .hero {
+
+        height: 210px;
+    }
+
+
+    .title {
+
+        font-size: 46px;
+    }
+
+
+    .links {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .link-column {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<main class="dashboard">
+
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <img
+            src="lightYagami.jpg"
+            alt=""
+        >
+
+    </div>
+
+
+    <!-- TITLE -->
+
+    <section class="identity">
+
+        <h1 class="title">
+            ~/cod<span>e</span>
+        </h1>
+
+    </section>
+
+
+    <!-- LINKS -->
+
+    <section class="links">
+
+
+        <!-- LEFT COLUMN -->
+
+        <div class="link-column">
+
+
+            <div class="group">
+
+                <div class="group-title">
+                    build
+                </div>
+
+                <a
+                    href="https://github.com/"
+                    target="_blank"
+                >
+                    GitHub
+                </a>
+
+                <a
+                    href="https://github.dev/"
+                    target="_blank"
+                >
+                    GitHub.dev
+                </a>
+
+                <a
+                    href="https://codepen.io/"
+                    target="_blank"
+                >
+                    CodePen
+                </a>
+
+            </div>
+
+
+            <div class="group">
+
+                <div class="group-title">
+                    design
+                </div>
+
+                <a
+                    href="https://www.figma.com/"
+                    target="_blank"
+                >
+                    Figma
+                </a>
+
+                <a
+                    href="https://excalidraw.com/"
+                    target="_blank"
+                >
+                    Excalidraw
+                </a>
+
+                <a
+                    href="https://mermaid.live/"
+                    target="_blank"
+                >
+                    Mermaid
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- RIGHT COLUMN -->
+
+        <div class="link-column">
+
+
+            <div class="group">
+
+                <div class="group-title">
+                    solve
+                </div>
+
+                <a
+                    href="https://leetcode.com/"
+                    target="_blank"
+                >
+                    LeetCode
+                </a>
+
+                <a
+                    href="https://codeforces.com/"
+                    target="_blank"
+                >
+                    Codeforces
+                </a>
+
+                <a
+                    href="https://www.hackerrank.com/"
+                    target="_blank"
+                >
+                    HackerRank
+                </a>
+
+            </div>
+
+
+            <div class="group">
+
+                <div class="group-title">
+                    knowledge
+                </div>
+
+                <a
+                    href="https://developer.mozilla.org/"
+                    target="_blank"
+                >
+                    MDN
+                </a>
+
+                <a
+                    href="https://devdocs.io/"
+                    target="_blank"
+                >
+                    DevDocs
+                </a>
+
+                <a
+                    href="https://stackoverflow.com/"
+                    target="_blank"
+                >
+                    Stack Overflow
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+
+        <a href="collections.html">
+            ~/collections
+        </a>
+
+    </footer>
+
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   KEYBOARD NAVIGATION
+========================================================= */
+
+const links =
+    [...document.querySelectorAll(".links a")];
+
+
+function move(direction) {
+
+    const current =
+        document.activeElement;
+
+
+    if (!links.includes(current)) {
+
+        links[0].focus();
+
+        return;
+    }
+
+
+    const currentRect =
+        current.getBoundingClientRect();
+
+
+    const currentX =
+        currentRect.left +
+        currentRect.width / 2;
+
+
+    const currentY =
+        currentRect.top +
+        currentRect.height / 2;
+
+
+    let best = null;
+
+    let bestScore = Infinity;
+
+
+    links.forEach(link => {
+
+        if (link === current)
+            return;
+
+
+        const rect =
+            link.getBoundingClientRect();
+
+
+        const x =
+            rect.left +
+            rect.width / 2;
+
+
+        const y =
+            rect.top +
+            rect.height / 2;
+
+
+        const dx =
+            x - currentX;
+
+
+        const dy =
+            y - currentY;
+
+
+        if (
+            direction === "left" &&
+            dx >= -5
+        )
+            return;
+
+
+        if (
+            direction === "right" &&
+            dx <= 5
+        )
+            return;
+
+
+        if (
+            direction === "up" &&
+            dy >= -5
+        )
+            return;
+
+
+        if (
+            direction === "down" &&
+            dy <= 5
+        )
+            return;
+
+
+        let score;
+
+
+        if (
+            direction === "left" ||
+            direction === "right"
+        ) {
+
+            score =
+                Math.abs(dx) +
+                Math.abs(dy) * 2;
+
+        } else {
+
+            score =
+                Math.abs(dy) +
+                Math.abs(dx) * 2;
+
+        }
+
+
+        if (score < bestScore) {
+
+            bestScore =
+                score;
+
+            best =
+                link;
+        }
+
+    });
+
+
+    if (best) {
+
+        best.focus();
+
+    }
+
+}
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        switch (event.key) {
+
+
+            case "h":
+            case "ArrowLeft":
+
+                event.preventDefault();
+
+                move("left");
+
+                break;
+
+
+            case "l":
+            case "ArrowRight":
+
+                event.preventDefault();
+
+                move("right");
+
+                break;
+
+
+            case "k":
+            case "ArrowUp":
+
+                event.preventDefault();
+
+                move("up");
+
+                break;
+
+
+            case "j":
+            case "ArrowDown":
+
+                event.preventDefault();
+
+                move("down");
+
+                break;
+
+
+            case "Enter":
+
+                if (
+                    links.includes(
+                        document.activeElement
+                    )
+                ) {
+
+                    event.preventDefault();
+
+                    document.activeElement.click();
+
+                }
+
+                break;
+
+
+            case "Escape":
+            case "m":
+
+                event.preventDefault();
+
+                window.location.href =
+                    "collections.html";
+
+                break;
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>
