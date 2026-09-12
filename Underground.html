@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>~/underground</title>
+
+
+<style>
+
+/* =========================================================
+   FONTS
+========================================================= */
+
+@import url(
+    'https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap'
+);
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+:root {
+
+    --bg: #090711;
+
+    --text: #d9d0e7;
+
+    --muted: #71677f;
+
+    --purple: #9b72c7;
+
+    --purple-bright: #c49bea;
+
+    --magenta: #b653a5;
+
+    --pink: #d783c5;
+
+    --hover: #eee5f7;
+
+    --line: #251b32;
+
+    --link-bg: rgba(155, 114, 199, 0.08);
+
+    --link-hover: rgba(182, 83, 165, 0.15);
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+
+    width: 100%;
+    min-height: 100%;
+
+    margin: 0;
+
+    background: var(--bg);
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+
+    min-height: 100vh;
+
+    padding: 40px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    color: var(--text);
+
+    font-family:
+        "Share Tech Mono",
+        monospace;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =========================================================
+   CRT SCANLINES
+========================================================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 20;
+
+    opacity: 0.16;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 3px,
+            rgba(180, 130, 220, 0.025) 4px
+        );
+
+    mix-blend-mode: screen;
+}
+
+
+/* =========================================================
+   AMBIENT PURPLE GLOW
+========================================================= */
+
+body::after {
+
+    content: "";
+
+    position: fixed;
+
+    width: 700px;
+    height: 700px;
+
+    right: 0;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(108, 54, 140, 0.15),
+            transparent 68%
+        );
+
+    filter:
+        blur(55px);
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard {
+
+    width:
+        min(1120px, 100%);
+
+    display: grid;
+
+    /*
+       TEXT | IMAGE
+    */
+
+    grid-template-columns:
+        minmax(0, 1fr) 310px;
+
+    column-gap:
+        88px;
+
+    align-items:
+        center;
+
+    position:
+        relative;
+
+    z-index:
+        1;
+}
+
+
+/* =========================================================
+   IMAGE FRAME
+========================================================= */
+
+.portrait {
+
+    width:
+        310px;
+
+    height:
+        465px;
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    flex-shrink:
+        0;
+
+    background:
+        #100b18;
+
+    /*
+       Slightly irregular corners.
+    */
+
+    border-radius:
+        4px 18px 5px 14px;
+
+    border:
+        1px solid
+        rgba(155, 114, 199, 0.42);
+
+    box-shadow:
+
+        0 0 0 1px
+        rgba(182, 83, 165, 0.08),
+
+        0 20px 60px
+        rgba(0, 0, 0, 0.55),
+
+        0 0 50px
+        rgba(104, 47, 135, 0.14);
+
+    /*
+       Image begins hidden from LEFT.
+    */
+
+    clip-path:
+        inset(0 100% 0 0);
+
+    transform:
+        translateX(15px)
+        skewY(1deg);
+
+    animation:
+        imageEnter
+        1.05s
+        cubic-bezier(.22,.61,.36,1)
+        forwards;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.portrait img {
+
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    object-position:
+        center;
+
+    filter:
+        saturate(0.9)
+        contrast(1.05)
+        brightness(0.82);
+
+    transform:
+        scale(1.025);
+
+    transition:
+        filter 0.4s ease,
+        transform 0.5s ease;
+}
+
+
+/* =========================================================
+   IMAGE HOVER
+========================================================= */
+
+.portrait:hover img {
+
+    filter:
+        saturate(1.05)
+        contrast(1.08)
+        brightness(0.88);
+
+    transform:
+        scale(1.04);
+}
+
+
+/* =========================================================
+   IMAGE GLITCH
+========================================================= */
+
+.portrait::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        2;
+
+    pointer-events:
+        none;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(182, 83, 165, 0.06) 48%,
+            rgba(196, 155, 234, 0.08) 50%,
+            transparent 52%
+        );
+
+    mix-blend-mode:
+        screen;
+
+    animation:
+        imageGlitch
+        7s
+        steps(1)
+        infinite;
+}
+
+
+/* =========================================================
+   IMAGE SCANLINES
+========================================================= */
+
+.portrait::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        3;
+
+    pointer-events:
+        none;
+
+    background:
+
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 5px,
+            rgba(10, 5, 20, 0.10) 6px
+        );
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content {
+
+    min-width:
+        0;
+
+    opacity:
+        0;
+
+    /*
+       Text enters from RIGHT.
+    */
+
+    transform:
+        translateX(35px);
+
+    animation:
+        textEnter
+        0.9s
+        cubic-bezier(.22,.61,.36,1)
+        forwards;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.greeting {
+
+    margin:
+        0 0 2px;
+
+    color:
+        var(--hover);
+
+    font-family:
+        "VT323",
+        monospace;
+
+    font-size:
+        52px;
+
+    font-weight:
+        400;
+
+    line-height:
+        0.9;
+
+    letter-spacing:
+        1px;
+
+    text-shadow:
+
+        2px 0
+        rgba(182, 83, 165, 0.35),
+
+        -2px 0
+        rgba(117, 92, 180, 0.25);
+
+    animation:
+        titleFlicker
+        5s
+        steps(1)
+        1.2s
+        infinite;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.date {
+
+    margin-bottom:
+        38px;
+
+    color:
+        var(--muted);
+
+    font-family:
+        "Share Tech Mono",
+        monospace;
+
+    font-size:
+        12px;
+
+    letter-spacing:
+        0.4px;
+}
+
+
+/* =========================================================
+   GROUPS
+========================================================= */
+
+.groups {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, minmax(130px, 1fr));
+
+    column-gap:
+        64px;
+
+    row-gap:
+        34px;
+}
+
+
+/* =========================================================
+   GROUP TITLE
+========================================================= */
+
+.group-title {
+
+    margin-bottom:
+        10px;
+
+    color:
+        var(--purple);
+
+    font-family:
+        "Share Tech Mono",
+        monospace;
+
+    font-size:
+        16px;
+
+    font-weight:
+        400;
+
+    letter-spacing:
+        0.5px;
+
+    white-space:
+        nowrap;
+}
+
+
+.group-title::before {
+
+    content:
+        "> ";
+
+    color:
+        var(--magenta);
+
+    opacity:
+        0.85;
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.links {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-start;
+
+    gap:
+        5px;
+}
+
+
+.links a {
+
+    position:
+        relative;
+
+    width:
+        fit-content;
+
+    padding:
+        4px 9px;
+
+    border-radius:
+        3px;
+
+    color:
+        #aa9ab8;
+
+    text-decoration:
+        none;
+
+    font-family:
+        "Share Tech Mono",
+        monospace;
+
+    font-size:
+        17px;
+
+    font-weight:
+        400;
+
+    line-height:
+        1.35;
+
+    letter-spacing:
+        0.2px;
+
+    transition:
+
+        color 0.12s ease,
+
+        background 0.12s ease,
+
+        transform 0.12s ease,
+
+        text-shadow 0.12s ease;
+}
+
+
+/* =========================================================
+   TERMINAL ARROW
+========================================================= */
+
+.links a::before {
+
+    content:
+        "›";
+
+    position:
+        absolute;
+
+    left:
+        -8px;
+
+    color:
+        var(--magenta);
+
+    opacity:
+        0;
+
+    transform:
+        translateX(-4px);
+
+    transition:
+
+        opacity 0.12s ease,
+
+        transform 0.12s ease;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.links a:hover {
+
+    color:
+        var(--hover);
+
+    background:
+        var(--link-hover);
+
+    transform:
+        translateX(6px);
+
+    text-shadow:
+
+        0 0 8px
+        rgba(196, 155, 234, 0.28);
+}
+
+
+.links a:hover::before {
+
+    opacity:
+        1;
+
+    transform:
+        translateX(0);
+}
+
+
+/* =========================================================
+   KEYBOARD FOCUS
+========================================================= */
+
+.links a:focus,
+.links a:focus-visible {
+
+    outline:
+        none;
+
+    color:
+        #f0e5fa;
+
+    background:
+        rgba(155, 114, 199, 0.15);
+
+    transform:
+        translateX(7px);
+
+    box-shadow:
+
+        inset 2px 0
+        var(--magenta);
+
+    text-shadow:
+
+        0 0 8px
+        rgba(196, 155, 234, 0.35);
+}
+
+
+.links a:focus::before,
+.links a:focus-visible::before {
+
+    opacity:
+        1;
+
+    transform:
+        translateX(0);
+}
+
+
+/* =========================================================
+   SLIGHTLY UNEVEN GROUP POSITIONS
+========================================================= */
+
+.group:nth-child(2) {
+
+    transform:
+        translateY(7px);
+}
+
+
+.group:nth-child(3) {
+
+    transform:
+        translateY(-3px);
+}
+
+
+.group:nth-child(4) {
+
+    transform:
+        translateY(5px);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    display:
+        block;
+
+    margin-top:
+        42px;
+
+    padding-top:
+        10px;
+
+    border-top:
+        1px solid var(--line);
+
+    font-family:
+        "Share Tech Mono",
+        monospace;
+
+    font-size:
+        12px;
+}
+
+
+.footer a,
+.footer a:visited {
+
+    color:
+        #574a62;
+
+    text-decoration:
+        none;
+
+    cursor:
+        pointer;
+
+    transition:
+        color 0.15s ease;
+}
+
+
+.footer a:hover {
+
+    color:
+        var(--purple-bright);
+
+    text-decoration:
+        none;
+}
+
+
+/* =========================================================
+   IMAGE ENTRANCE
+========================================================= */
+
+@keyframes imageEnter {
+
+    0% {
+
+        clip-path:
+            inset(0 100% 0 0);
+
+        transform:
+            translateX(28px)
+            skewY(2deg);
+    }
+
+
+    45% {
+
+        clip-path:
+            inset(0 35% 0 0);
+
+        transform:
+            translateX(7px)
+            skewY(-1deg);
+    }
+
+
+    75% {
+
+        clip-path:
+            inset(0 0 0 0);
+
+        transform:
+            translateX(-3px)
+            skewY(0.5deg);
+    }
+
+
+    100% {
+
+        clip-path:
+            inset(0 0 0 0);
+
+        transform:
+            translateX(0)
+            skewY(0);
+    }
+}
+
+
+/* =========================================================
+   TEXT ENTRANCE
+========================================================= */
+
+@keyframes textEnter {
+
+    0% {
+
+        opacity:
+            0;
+
+        transform:
+            translateX(35px);
+    }
+
+
+    65% {
+
+        opacity:
+            1;
+
+        transform:
+            translateX(-4px);
+    }
+
+
+    100% {
+
+        opacity:
+            1;
+
+        transform:
+            translateX(0);
+    }
+}
+
+
+/* =========================================================
+   TITLE FLICKER
+========================================================= */
+
+@keyframes titleFlicker {
+
+    0%,
+    91%,
+    94%,
+    100% {
+
+        opacity:
+            1;
+
+        text-shadow:
+
+            2px 0
+            rgba(182, 83, 165, 0.35),
+
+            -2px 0
+            rgba(117, 92, 180, 0.25);
+    }
+
+
+    92% {
+
+        opacity:
+            0.72;
+
+        text-shadow:
+
+            -3px 0
+            rgba(182, 83, 165, 0.5),
+
+            3px 0
+            rgba(117, 92, 180, 0.4);
+    }
+
+
+    93% {
+
+        opacity:
+            0.92;
+
+        text-shadow:
+
+            3px 0
+            rgba(182, 83, 165, 0.5),
+
+            -3px 0
+            rgba(117, 92, 180, 0.4);
+    }
+}
+
+
+/* =========================================================
+   IMAGE GLITCH
+========================================================= */
+
+@keyframes imageGlitch {
+
+    0%,
+    87%,
+    100% {
+
+        transform:
+            translateX(0);
+
+        opacity:
+            0.3;
+    }
+
+
+    88% {
+
+        transform:
+            translateX(2px);
+
+        opacity:
+            0.7;
+    }
+
+
+    89% {
+
+        transform:
+            translateX(-3px);
+
+        opacity:
+            0.5;
+    }
+
+
+    90% {
+
+        transform:
+            translateX(1px);
+
+        opacity:
+            0.4;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+    body {
+
+        padding:
+            28px 22px;
+    }
+
+
+    .dashboard {
+
+        grid-template-columns:
+            1fr;
+
+        row-gap:
+            40px;
+
+        width:
+            min(500px, 100%);
+    }
+
+
+    .portrait {
+
+        width:
+            220px;
+
+        height:
+            330px;
+
+        justify-self:
+            center;
+    }
+
+
+    .groups {
+
+        column-gap:
+            30px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .groups {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .greeting {
+
+        font-size:
+            44px;
+    }
+
+
+    .group:nth-child(2),
+    .group:nth-child(3),
+    .group:nth-child(4) {
+
+        transform:
+            none;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .portrait,
+    .content,
+    .greeting,
+    .portrait::before {
+
+        animation:
+            none;
+
+        opacity:
+            1;
+
+        transform:
+            none;
+
+        clip-path:
+            inset(0 0 0 0);
+    }
+
+
+    .links a {
+
+        transition:
+            none;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+<div class="dashboard">
+
+
+    <!-- =====================================================
+         LEFT SIDE: CONTENT
+    ====================================================== -->
+
+    <div class="content">
+
+
+        <!-- TITLE -->
+
+        <h1 class="greeting">
+            ~/underground
+        </h1>
+
+
+        <!-- DATE -->
+
+        <div
+            class="date"
+            id="date"
+        ></div>
+
+
+        <!-- =================================================
+             LINK GROUPS
+        ================================================== -->
+
+        <div class="groups">
+
+
+            <!-- =================================================
+                 OSINT
+            ================================================== -->
+
+            <div class="group">
+
+                <div class="group-title">
+                    ~/osint
+                </div>
+
+                <div class="links">
+
+                    <a
+                        href="https://www.shodan.io"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Shodan
+                    </a>
+
+                    <a
+                        href="https://web.archive.org"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Wayback Machine
+                    </a>
+
+                    <a
+                        href="https://haveibeenpwned.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Have I Been Pwned
+                    </a>
+
+                    <a
+                        href="https://www.google.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Google
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 RESOURCES
+            ================================================== -->
+
+            <div class="group">
+
+                <div class="group-title">
+                    ~/resources
+                </div>
+
+                <div class="links">
+
+                    <a
+                        href="https://fmhy.net"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        FMHY
+                    </a>
+
+                    <a
+                        href="https://www.privacyguides.org"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Privacy Guides
+                    </a>
+
+                    <a
+                        href="https://github.com/sindresorhus/awesome"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Awesome Lists
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 FORUMS
+            ================================================== -->
+
+            <div class="group">
+
+                <div class="group-title">
+                    ~/forums
+                </div>
+
+                <div class="links">
+
+                    <a
+                        href="https://www.reddit.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Reddit
+                    </a>
+
+                    <a
+                        href="https://news.ycombinator.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Hacker News
+                    </a>
+
+                    <a
+                        href="https://stackexchange.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Stack Exchange
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PRIVACY
+            ================================================== -->
+
+            <div class="group">
+
+                <div class="group-title">
+                    ~/privacy
+                </div>
+
+                <div class="links">
+
+                    <a
+                        href="https://www.torproject.org"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Tor Project
+                    </a>
+
+                    <a
+                        href="https://proton.me"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Proton
+                    </a>
+
+                    <a
+                        href="https://www.privacyguides.org"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Privacy Guides
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             FOOTER
+        ====================================================== -->
+
+        <div class="footer">
+
+            <a href="collections.html">
+                ~/collections
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         RIGHT SIDE: IMAGE
+    ====================================================== -->
+
+    <div class="portrait">
+
+        <img
+            src="Itadori.jpg"
+            alt=""
+        >
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================================
+   DATE / TIME
+========================================================= */
+
+function updateDate() {
+
+    const now =
+        new Date();
+
+
+    const day =
+        now.toLocaleDateString(
+            undefined,
+            {
+                weekday: "long"
+            }
+        );
+
+
+    const date =
+        now.toLocaleDateString(
+            undefined,
+            {
+                day: "2-digit",
+
+                month: "2-digit",
+
+                year: "numeric"
+            }
+        );
+
+
+    const time =
+        now.toLocaleTimeString(
+            undefined,
+            {
+                hour: "2-digit",
+
+                minute: "2-digit",
+
+                second: "2-digit",
+
+                hour12: false
+            }
+        );
+
+
+    document.getElementById(
+        "date"
+    ).textContent =
+        `${day} ${time} | ${date}`;
+}
+
+
+updateDate();
+
+
+setInterval(
+    updateDate,
+    1000
+);
+
+
+/* =========================================================
+   KEYBOARD NAVIGATION
+========================================================= */
+
+const links = [
+    ...document.querySelectorAll(
+        ".links a"
+    )
+];
+
+
+function move(direction) {
+
+    const currentLink =
+        document.activeElement;
+
+
+    /*
+       If no link currently has
+       focus, start at the first one.
+    */
+
+    if (
+        !links.includes(
+            currentLink
+        )
+    ) {
+
+        links[0].focus();
+
+        return;
+    }
+
+
+    const currentRect =
+        currentLink.getBoundingClientRect();
+
+
+    const currentX =
+        currentRect.left +
+        currentRect.width / 2;
+
+
+    const currentY =
+        currentRect.top +
+        currentRect.height / 2;
+
+
+    let bestLink =
+        null;
+
+
+    let bestScore =
+        Infinity;
+
+
+    links.forEach(link => {
+
+
+        if (
+            link === currentLink
+        )
+            return;
+
+
+        const rect =
+            link.getBoundingClientRect();
+
+
+        const x =
+            rect.left +
+            rect.width / 2;
+
+
+        const y =
+            rect.top +
+            rect.height / 2;
+
+
+        const dx =
+            x - currentX;
+
+
+        const dy =
+            y - currentY;
+
+
+        /*
+           Only consider links in
+           the requested direction.
+        */
+
+        if (
+            direction === "left" &&
+            dx >= -5
+        )
+            return;
+
+
+        if (
+            direction === "right" &&
+            dx <= 5
+        )
+            return;
+
+
+        if (
+            direction === "up" &&
+            dy >= -5
+        )
+            return;
+
+
+        if (
+            direction === "down" &&
+            dy <= 5
+        )
+            return;
+
+
+        let score;
+
+
+        /*
+           Horizontal movement.
+        */
+
+        if (
+            direction === "left" ||
+            direction === "right"
+        ) {
+
+            score =
+                Math.abs(dx) +
+                Math.abs(dy) * 2;
+
+        }
+
+
+        /*
+           Vertical movement.
+        */
+
+        else {
+
+            score =
+                Math.abs(dy) +
+                Math.abs(dx) * 2;
+        }
+
+
+        if (
+            score < bestScore
+        ) {
+
+            bestScore =
+                score;
+
+            bestLink =
+                link;
+        }
+
+    });
+
+
+    if (bestLink) {
+
+        bestLink.focus();
+    }
+}
+
+
+/* =========================================================
+   KEYBOARD CONTROLS
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+
+        switch (
+            event.key
+        ) {
+
+
+            /* -----------------------------------------------
+               LEFT
+            ------------------------------------------------ */
+
+            case "ArrowLeft":
+            case "h":
+
+                event.preventDefault();
+
+                move("left");
+
+                break;
+
+
+            /* -----------------------------------------------
+               RIGHT
+            ------------------------------------------------ */
+
+            case "ArrowRight":
+            case "l":
+
+                event.preventDefault();
+
+                move("right");
+
+                break;
+
+
+            /* -----------------------------------------------
+               UP
+            ------------------------------------------------ */
+
+            case "ArrowUp":
+            case "k":
+
+                event.preventDefault();
+
+                move("up");
+
+                break;
+
+
+            /* -----------------------------------------------
+               DOWN
+            ------------------------------------------------ */
+
+            case "ArrowDown":
+            case "j":
+
+                event.preventDefault();
+
+                move("down");
+
+                break;
+
+
+            /* -----------------------------------------------
+               OPEN
+            ------------------------------------------------ */
+
+            case "Enter":
+
+                if (
+                    links.includes(
+                        document.activeElement
+                    )
+                ) {
+
+                    event.preventDefault();
+
+                    document.activeElement.click();
+                }
+
+                break;
+
+
+            /* -----------------------------------------------
+               COLLECTIONS
+            ------------------------------------------------ */
+
+            case "m":
+
+                window.location.href =
+                    "collections.html";
+
+                break;
+
+
+            /* -----------------------------------------------
+               ESCAPE
+            ------------------------------------------------ */
+
+            case "Escape":
+
+                window.location.href =
+                    "collections.html";
+
+                break;
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
