@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>~/social</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap');
+
+
+/* =========================================================
+   SOCIAL THEME
+========================================================= */
+
+:root {
+
+    --bg: #101313;
+
+    --text: #eee6d7;
+    --muted: #879392;
+
+    /* Gintoki palette */
+    --orange: #d06a43;
+    --orange-light: #e78a61;
+
+    --cream: #f1e5d0;
+
+    --teal: #9fbeb7;
+    --teal-dark: #526b67;
+
+    --hover: #fff8eb;
+
+    --line: #293433;
+
+    --link-bg: rgba(208, 106, 67, 0.08);
+    --link-hover: rgba(208, 106, 67, 0.15);
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+
+    width: 100%;
+    min-height: 100%;
+
+    margin: 0;
+
+    background: var(--bg);
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+
+    min-height: 100vh;
+
+    padding: 40px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    color: var(--text);
+
+    font-family:
+        "Nunito",
+        sans-serif;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   MAIN DASHBOARD
+========================================================= */
+
+.dashboard {
+
+    width: min(1120px, 100%);
+
+    display: grid;
+
+    /*
+       Social is the REVERSE of Work:
+
+       TEXT | IMAGE
+    */
+
+    grid-template-columns:
+        minmax(0, 1fr) 310px;
+
+    column-gap: 88px;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.portrait {
+
+    width: 310px;
+    height: 465px;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+
+    background: #181d1d;
+
+    /*
+       Friendly rounded shape.
+    */
+
+    border-radius: 24px;
+
+    border:
+        2px solid rgba(208, 106, 67, 0.28);
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.35);
+
+    /*
+       Image starts hidden from the LEFT
+       and grows toward the RIGHT.
+    */
+
+    clip-path:
+        inset(0 100% 0 0);
+
+    animation:
+        imageEnter
+        0.9s
+        cubic-bezier(.34,1.56,.64,1)
+        forwards;
+}
+
+
+.portrait img {
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    /*
+       Keep Gintoki's actual colors.
+    */
+
+    filter:
+        saturate(1.08)
+        contrast(0.97)
+        brightness(0.97);
+
+    transform:
+        scale(1.015);
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content {
+
+    min-width: 0;
+
+    /*
+       Text enters from the RIGHT.
+    */
+
+    opacity: 0;
+
+    transform:
+        translateX(42px)
+        rotate(1deg);
+
+    animation:
+        textEnter
+        0.85s
+        cubic-bezier(.34,1.56,.64,1)
+        forwards;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.greeting {
+
+    margin: 0 0 4px;
+
+    color: var(--cream);
+
+    /*
+       Handwritten / human feeling.
+    */
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 54px;
+
+    line-height: 0.95;
+
+    font-weight: 700;
+
+    letter-spacing: 0;
+
+    transform:
+        rotate(-1deg);
+
+    transform-origin: left center;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.date {
+
+    margin-bottom: 38px;
+
+    color: var(--muted);
+
+    font-family:
+        "Nunito",
+        sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    letter-spacing: 0.2px;
+}
+
+
+/* =========================================================
+   GROUPS
+========================================================= */
+
+.groups {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(130px, 1fr));
+
+    column-gap: 64px;
+
+    row-gap: 34px;
+}
+
+
+/* =========================================================
+   GROUP TITLE
+========================================================= */
+
+.group-title {
+
+    margin-bottom: 9px;
+
+    color: var(--orange);
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 23px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    letter-spacing: 0;
+
+    white-space: nowrap;
+
+    transform:
+        rotate(-1deg);
+
+    transform-origin: left center;
+}
+
+
+/* =========================================================
+   LINKS CONTAINER
+========================================================= */
+
+.links {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 5px;
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.links a {
+
+    position: relative;
+
+    width: fit-content;
+
+    padding:
+        4px 10px;
+
+    border-radius: 10px;
+
+    color: var(--teal);
+
+    text-decoration: none;
+
+    font-family:
+        "Nunito",
+        sans-serif;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    line-height: 1.35;
+
+    transition:
+        color 0.18s ease,
+        background 0.18s ease,
+        transform 0.18s cubic-bezier(.34,1.56,.64,1),
+        box-shadow 0.18s ease;
+}
+
+
+/* =========================================================
+   LITTLE UNDERLINE
+========================================================= */
+
+.links a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 10px;
+    bottom: 2px;
+
+    width: 0;
+    height: 2px;
+
+    border-radius: 99px;
+
+    background:
+        var(--orange);
+
+    transition:
+        width 0.25s cubic-bezier(.34,1.56,.64,1);
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.links a:hover {
+
+    color: var(--hover);
+
+    background:
+        var(--link-hover);
+
+    transform:
+        translateX(7px)
+        rotate(-1deg);
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+
+.links a:hover::after {
+
+    width:
+        calc(100% - 20px);
+}
+
+
+/* =========================================================
+   KEYBOARD FOCUS
+========================================================= */
+
+.links a:focus,
+.links a:focus-visible {
+
+    outline: none;
+
+    color: var(--hover);
+
+    background:
+        rgba(208, 106, 67, 0.17);
+
+    transform:
+        translateX(8px)
+        rotate(-1deg);
+
+    box-shadow:
+        0 0 0 1px
+        rgba(208, 106, 67, 0.28);
+}
+
+
+.links a:focus-visible::after {
+
+    width:
+        calc(100% - 20px);
+}
+
+
+/* =========================================================
+   GROUP PERSONALITY
+========================================================= */
+
+/*
+   Tiny vertical imperfections.
+   Makes the layout feel less corporate.
+*/
+
+.group:nth-child(2) {
+
+    transform:
+        translateY(7px);
+}
+
+
+.group:nth-child(3) {
+
+    transform:
+        translateY(-4px);
+}
+
+
+.group:nth-child(4) {
+
+    transform:
+        translateY(5px);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    display: block;
+
+    margin-top: 42px;
+
+    padding-top: 10px;
+
+    border-top:
+        1px solid var(--line);
+
+    font-size: 12px;
+}
+
+
+.footer a,
+.footer a:visited {
+
+    color: #65706e;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        color 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+.footer a:hover {
+
+    color: var(--orange);
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   IMAGE ENTRANCE
+========================================================= */
+
+/*
+   LEFT → RIGHT
+
+   Because the image is on the RIGHT side,
+   it feels like it is unfolding into the page.
+*/
+
+@keyframes imageEnter {
+
+    0% {
+
+        clip-path:
+            inset(0 100% 0 0);
+
+        transform:
+            translateX(25px)
+            rotate(4deg);
+    }
+
+
+    65% {
+
+        clip-path:
+            inset(0 0 0 0);
+
+        transform:
+            translateX(-4px)
+            rotate(-1deg);
+    }
+
+
+    100% {
+
+        clip-path:
+            inset(0 0 0 0);
+
+        transform:
+            translateX(0)
+            rotate(0deg);
+    }
+}
+
+
+/* =========================================================
+   TEXT ENTRANCE
+========================================================= */
+
+@keyframes textEnter {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateX(42px)
+            rotate(2deg);
+    }
+
+
+    70% {
+
+        opacity: 1;
+
+        transform:
+            translateX(-5px)
+            rotate(-0.5deg);
+    }
+
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            translateX(0)
+            rotate(0);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+    body {
+
+        padding:
+            28px 22px;
+    }
+
+
+    .dashboard {
+
+        grid-template-columns:
+            1fr;
+
+        row-gap: 40px;
+
+        width:
+            min(500px, 100%);
+    }
+
+
+    .portrait {
+
+        width: 220px;
+
+        height: 330px;
+
+        justify-self: center;
+    }
+
+
+    .groups {
+
+        column-gap: 30px;
+    }
+}
+
+
+@media (max-width: 430px) {
+
+    .groups {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .greeting {
+
+        font-size: 44px;
+    }
+
+
+    .group:nth-child(2),
+    .group:nth-child(3),
+    .group:nth-child(4) {
+
+        transform:
+            none;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .portrait,
+    .content {
+
+        animation: none;
+
+        opacity: 1;
+
+        transform: none;
+
+        clip-path:
+            inset(0 0 0 0);
+    }
+
+    .links a,
+    .links a::after {
+
+        transition: none;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+    <!-- =========================
+         CONTENT
+    ========================== -->
+
+    <div class="content">
+
+
+        <h1 class="greeting">~/social</h1>
+
+
+        <div class="date" id="date"></div>
+
+
+        <div class="groups">
+
+
+            <!-- SOCIAL -->
+
+            <div class="group">
+
+                <div class="group-title">
+                    ~/social
+                </div>
+
+                <div class="links">
+
+                    <a href="https://www.reddit.com"
+                       target="_blank">
+                        Reddit
+                    </a>
+
+                    <a href="https://discord.com"
+                       target="_blank">
+                        Discord
+                    </a>
+
+                    <a href="https://www.instagram.com"
+                       target="_blank">
+                        Instagram
+                    </a>
+
+                    <a href="https://www.twitch.tv"
+                       target="_blank">
+                        Twitch
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- COMMUNITIES -->
+
+            <div class="group">
+
+                <div class="group-title">
+                    ~/communities
+                </div>
+
+                <div class="links">
+
+                    <a href="https://www.youtube.com"
+                       target="_blank">
+                        YouTube
+                    </a>
+
+                    <a href="https://x.com"
+                       target="_blank">
+                        X
+                    </a>
+
+                    <a href="https://t.me"
+                       target="_blank">
+                        Telegram
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- DEV SOCIAL -->
+
+            <div class="group">
+
+                <div class="group-title">
+                    ~/dev-social
+                </div>
+
+                <div class="links">
+
+                    <a href="https://github.com"
+                       target="_blank">
+                        GitHub
+                    </a>
+
+                    <a href="https://dev.to"
+                       target="_blank">
+                        DEV Community
+                    </a>
+
+                    <a href="https://hashnode.com"
+                       target="_blank">
+                        Hashnode
+                    </a>
+
+                    <a href="https://www.producthunt.com"
+                       target="_blank">
+                        Product Hunt
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- CREATIVE -->
+
+            <div class="group">
+
+                <div class="group-title">
+                    ~/creative
+                </div>
+
+                <div class="links">
+
+                    <a href="https://www.behance.net"
+                       target="_blank">
+                        Behance
+                    </a>
+
+                    <a href="https://dribbble.com"
+                       target="_blank">
+                        Dribbble
+                    </a>
+
+                    <a href="https://www.figma.com/community"
+                       target="_blank">
+                        Figma Community
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer">
+
+            <a href="collections.html">
+                ~/collections
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =========================
+         IMAGE
+    ========================== -->
+
+    <div class="portrait">
+
+        <img src="Gintoki.jpg" alt="">
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+/* =========================
+   DATE / TIME
+========================= */
+
+function updateDate() {
+
+    const now = new Date();
+
+
+    const day =
+        now.toLocaleDateString(undefined, {
+            weekday: "long"
+        });
+
+
+    const date =
+        now.toLocaleDateString(undefined, {
+
+            day: "2-digit",
+
+            month: "2-digit",
+
+            year: "numeric"
+
+        });
+
+
+    const time =
+        now.toLocaleTimeString(undefined, {
+
+            hour: "2-digit",
+
+            minute: "2-digit",
+
+            second: "2-digit",
+
+            hour12: false
+
+        });
+
+
+    document.getElementById("date").textContent =
+        `${day} ${time} | ${date}`;
+}
+
+
+updateDate();
+
+setInterval(updateDate, 1000);
+
+
+/* =========================
+   KEYBOARD NAVIGATION
+========================= */
+
+const links = [
+    ...document.querySelectorAll(".links a")
+];
+
+
+function move(direction) {
+
+    const currentLink =
+        document.activeElement;
+
+
+    if (!links.includes(currentLink)) {
+
+        links[0].focus();
+
+        return;
+    }
+
+
+    const currentRect =
+        currentLink.getBoundingClientRect();
+
+
+    const currentX =
+        currentRect.left +
+        currentRect.width / 2;
+
+
+    const currentY =
+        currentRect.top +
+        currentRect.height / 2;
+
+
+    let bestLink = null;
+
+    let bestScore = Infinity;
+
+
+    links.forEach(link => {
+
+        if (link === currentLink)
+            return;
+
+
+        const rect =
+            link.getBoundingClientRect();
+
+
+        const x =
+            rect.left +
+            rect.width / 2;
+
+
+        const y =
+            rect.top +
+            rect.height / 2;
+
+
+        const dx =
+            x - currentX;
+
+
+        const dy =
+            y - currentY;
+
+
+        if (
+            direction === "left" &&
+            dx >= -5
+        )
+            return;
+
+
+        if (
+            direction === "right" &&
+            dx <= 5
+        )
+            return;
+
+
+        if (
+            direction === "up" &&
+            dy >= -5
+        )
+            return;
+
+
+        if (
+            direction === "down" &&
+            dy <= 5
+        )
+            return;
+
+
+        let score;
+
+
+        if (
+            direction === "left" ||
+            direction === "right"
+        ) {
+
+            score =
+                Math.abs(dx) +
+                Math.abs(dy) * 2;
+
+        } else {
+
+            score =
+                Math.abs(dy) +
+                Math.abs(dx) * 2;
+        }
+
+
+        if (score < bestScore) {
+
+            bestScore = score;
+
+            bestLink = link;
+        }
+
+    });
+
+
+    if (bestLink) {
+
+        bestLink.focus();
+    }
+}
+
+
+/* =========================
+   KEYBOARD
+========================= */
+
+document.addEventListener("keydown", event => {
+
+    switch (event.key) {
+
+
+        case "ArrowLeft":
+        case "h":
+
+            event.preventDefault();
+
+            move("left");
+
+            break;
+
+
+        case "ArrowRight":
+        case "l":
+
+            event.preventDefault();
+
+            move("right");
+
+            break;
+
+
+        case "ArrowUp":
+        case "k":
+
+            event.preventDefault();
+
+            move("up");
+
+            break;
+
+
+        case "ArrowDown":
+        case "j":
+
+            event.preventDefault();
+
+            move("down");
+
+            break;
+
+
+        case "Enter":
+
+            if (
+                links.includes(
+                    document.activeElement
+                )
+            ) {
+
+                event.preventDefault();
+
+                document.activeElement.click();
+            }
+
+            break;
+
+
+        case "m":
+
+            window.location.href =
+                "collections.html";
+
+            break;
+
+
+        case "Escape":
+
+            window.location.href =
+                "collections.html";
+
+            break;
+
+    }
+
+});
+
+</script>
+
+
+</body>
+</html>
