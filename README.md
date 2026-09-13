@@ -1,3 +1,4 @@
+
 # Web Dashboard
 
 A personal keyboard-first browser dashboard for organizing frequently used websites into themed collections.
@@ -10,44 +11,42 @@ The dashboard is designed as a lightweight, static start page with separate visu
 
 ### Collections
 
-<!-- Add screenshot here -->
-
 ![Collections](Media/collections.png)
 
-### Home
+### Dashboards
 
-<!-- Add screenshot here -->
-
-![Home](Media/home.png)
-
-### Work
-
-<!-- Add screenshot here -->
-
-![Work](media/work.png)
-
-### Code
-
-<!-- Add screenshot here -->
-
-![Code](media/code.png)
-
-### Social
-
-![Social](media/social.png)
-
-### Underground
-
-<!-- Add screenshot here -->
-
-![Underground](media/underground.png)
-
-### Entertainment
-
-<!-- Add screenshot here -->
-
-![Entertainment](media/entertainment.png)
-
+<table>
+  <tr>
+    <td align="center">
+      <strong>Home</strong><br><br>
+      <img src="Media/home.png" alt="Home">
+    </td>
+    <td align="center">
+      <strong>Work</strong><br><br>
+      <img src="Media/work.png" alt="Work">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>Code</strong><br><br>
+      <img src="Media/code.png" alt="Code">
+    </td>
+    <td align="center">
+      <strong>Social</strong><br><br>
+      <img src="Media/social.png" alt="Social">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>Underground</strong><br><br>
+      <img src="Media/underground.png" alt="Underground">
+    </td>
+    <td align="center">
+      <strong>Entertainment</strong><br><br>
+      <img src="Media/entertainment.png" alt="Entertainment">
+    </td>
+  </tr>
+</table>
 ---
 
 ## Features
@@ -101,3 +100,4 @@ The collections page remembers the last dashboard visited and restores it when o
 │
 ├── README.md
 └── LICENSE
+
