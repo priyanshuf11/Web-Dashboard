@@ -19,31 +19,31 @@ The dashboard is designed as a lightweight, static start page with separate visu
   <tr>
     <td align="center">
       <strong>Home</strong><br><br>
-      <img src="Media/home.png" alt="Home">
+      <img src="media/home.png" alt="Home">
     </td>
     <td align="center">
       <strong>Work</strong><br><br>
-      <img src="Media/work.png" alt="Work">
+      <img src="media/work.png" alt="Work">
     </td>
   </tr>
   <tr>
     <td align="center">
       <strong>Code</strong><br><br>
-      <img src="Media/code.png" alt="Code">
+      <img src="media/code.png" alt="Code">
     </td>
     <td align="center">
       <strong>Social</strong><br><br>
-      <img src="Media/social.png" alt="Social">
+      <img src="media/social.png" alt="Social">
     </td>
   </tr>
   <tr>
     <td align="center">
       <strong>Underground</strong><br><br>
-      <img src="Media/underground.png" alt="Underground">
+      <img src="media/underground.png" alt="Underground">
     </td>
     <td align="center">
       <strong>Entertainment</strong><br><br>
-      <img src="Media/entertainment.png" alt="Entertainment">
+      <img src="media/entertainment.png" alt="Entertainment">
     </td>
   </tr>
 </table>
@@ -82,18 +82,17 @@ The collections page remembers the last dashboard visited and restores it when o
 
 ```text
 .
-├── collections.html
+├── index.html
 ├── home.html
 ├── work.html
 ├── code.html
-├── ai.html
 ├── social.html
 ├── underground.html
 ├── entertainment.html
 │
-├── Reze.jpg
+├── reze.jpg
 ├── hirugama.jpg
-├── lightYagami.jpg
+├── lightyagami.jpg
 ├── gintoki.jpg
 ├── itadori.jpg
 ├── evaglion.jpg
